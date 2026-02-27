@@ -1,5 +1,6 @@
 ﻿# AI Diet Assistant Pro
 
+
 Premium AI Diet Assistant with a HealthyfyMe-style feature set:
 - Premium responsive UI/UX dashboard
 - Auth (signup/login/logout) with profile sync
