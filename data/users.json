@@ -1,0 +1,16 @@
+[
+  {
+    "email": "sawhneykunal05@gmail.com",
+    "salt": "77cc04f830ef0e7b2aa78740b719cdc0",
+    "passwordHash": "aedb92080b0a3071681ad0350e07380bca886e6c59d9cbdac940d60a3b3a8e730b18f2ec8820f10668167af49e9965894da811a4375b8bd1c820e9fc0f225796",
+    "profile": {
+      "age": 28,
+      "gender": "male",
+      "height": 170,
+      "weight": 72,
+      "activity": 1.375,
+      "goal": "maintain"
+    },
+    "createdAt": 1772224171981
+  }
+]

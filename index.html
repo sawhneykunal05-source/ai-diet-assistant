@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Diet Assistant Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Sora:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">AI Nutrition Suite</p>
+      <h1>Diet Assistant Pro</h1>
+    </div>
+    <div class="streak">
+      <span>Streak</span>
+      <strong id="streakCount">0 days</strong>
+      <small id="authStatus">Guest mode</small>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="card hero">
+      <div>
+        <h2>Personalized daily dashboard</h2>
+        <p>Track calories, macros, water, fasting, weight, and activity with an AI coach in one premium experience.</p>
+      </div>
+      <div class="goal-pill" id="goalChip">Goal: Maintenance</div>
+    </section>
+
+    <section class="card" id="authCard">
+      <h3>Account</h3>
+      <div class="grid two">
+        <label>Email <input id="authEmail" type="email" placeholder="you@email.com" /></label>
+        <label>Password <input id="authPassword" type="password" placeholder="••••••••" /></label>
+      </div>
+      <div class="action-row">
+        <button class="secondary" id="signupBtn">Sign Up</button>
+        <button class="primary" id="loginBtn">Log In</button>
+        <button class="ghost" id="logoutBtn">Log Out</button>
+      </div>
+      <p class="muted" id="authMessage">Create account to sync profile and use backend AI securely.</p>
+    </section>
+
+    <section class="card" id="profileCard">
+      <h3>Onboarding & Targets</h3>
+      <div class="grid two">
+        <label>Age <input id="age" type="number" min="12" max="90" value="28"></label>
+        <label>Gender
+          <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </label>
+        <label>Height (cm) <input id="height" type="number" min="130" max="230" value="170"></label>
+        <label>Weight (kg) <input id="weight" type="number" min="30" max="300" step="0.1" value="72"></label>
+        <label>Activity
+          <select id="activity">
+            <option value="1.2">Sedentary</option>
+            <option value="1.375" selected>Lightly Active</option>
+            <option value="1.55">Moderately Active</option>
+            <option value="1.725">Very Active</option>
+          </select>
+        </label>
+        <label>Goal
+          <select id="goal">
+            <option value="maintain">Maintenance</option>
+            <option value="lose">Fat Loss</option>
+            <option value="gain">Muscle Gain</option>
+          </select>
+        </label>
+      </div>
+      <button class="primary" id="saveProfile">Save & Recalculate</button>
+    </section>
+
+    <section class="card stats">
+      <h3>Today at a glance</h3>
+      <div class="tiles">
+        <article><p>Calories</p><h4><span id="consumedCalories">0</span> / <span id="targetCalories">0</span> kcal</h4><progress id="calorieProgress" max="100" value="0"></progress></article>
+        <article><p>Protein</p><h4><span id="consumedProtein">0</span> / <span id="targetProtein">0</span> g</h4><progress id="proteinProgress" max="100" value="0"></progress></article>
+        <article><p>Water</p><h4><span id="waterIntake">0</span> / 3.0 L</h4><progress id="waterProgress" max="100" value="0"></progress></article>
+        <article><p>Steps</p><h4><span id="stepCount">0</span> / 10000</h4><progress id="stepsProgress" max="100" value="0"></progress></article>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Meal Logger (Food DB)</h3>
+      <div class="grid two">
+        <label>Meal Type
+          <select id="mealType">
+            <option>Breakfast</option>
+            <option>Lunch</option>
+            <option>Dinner</option>
+            <option>Snack</option>
+          </select>
+        </label>
+        <label>Food
+          <select id="foodItem"></select>
+        </label>
+      </div>
+      <label>Servings <input id="servings" type="number" min="0.25" step="0.25" value="1"></label>
+      <button class="primary" id="addMeal">Add Meal</button>
+      <ul id="mealLog" class="log"></ul>
+    </section>
+
+    <section class="card" id="nutritionCard">
+      <h3>Nutrition Search & Barcode</h3>
+      <div class="grid two">
+        <label>Search Food
+          <input id="nutritionQuery" type="text" placeholder="e.g. chicken breast" />
+        </label>
+        <label>Barcode / GTIN
+          <input id="barcodeInput" type="text" placeholder="e.g. 012345678905" />
+        </label>
+      </div>
+      <div class="action-row">
+        <button class="secondary" id="searchNutritionBtn">Search</button>
+        <button class="secondary" id="barcodeSearchBtn">Find Barcode</button>
+      </div>
+      <ul id="nutritionResults" class="log"></ul>
+    </section>
+
+    <section class="card split">
+      <div>
+        <h3>Hydration</h3>
+        <p>Quick add 250 ml glass.</p>
+        <button class="secondary" id="addWater">+ 250 ml</button>
+      </div>
+      <div>
+        <h3>Activity</h3>
+        <label>Add Steps <input id="stepsInput" type="number" min="100" step="100" value="1000"></label>
+        <button class="secondary" id="addSteps">Update Steps</button>
+      </div>
+    </section>
+
+    <section class="card split">
+      <div>
+        <h3>Intermittent Fasting</h3>
+        <p id="fastingStatus">Not started</p>
+        <button class="secondary" id="startFast">Start 16:8 Fast</button>
+      </div>
+      <div>
+        <h3>Weight Tracker</h3>
+        <label>Log Weight (kg) <input id="logWeight" type="number" min="30" step="0.1"></label>
+        <button class="secondary" id="saveWeight">Save Weight</button>
+        <p id="weightTrend">No entries yet.</p>
+      </div>
+    </section>
+
+    <section class="card coach">
+      <h3>AI Coach</h3>
+      <p class="muted">Ask for meal swaps, cravings handling, or macro balancing.</p>
+      <div id="chatWindow" class="chat"></div>
+      <div class="chat-entry">
+        <input id="chatInput" type="text" placeholder="e.g., Suggest a high-protein vegetarian dinner" />
+        <button class="primary" id="sendChat">Send</button>
+      </div>
+    </section>
+  </main>
+
+  <template id="mealTemplate">
+    <li>
+      <div>
+        <strong class="mealName"></strong>
+        <span class="mealMeta"></span>
+      </div>
+      <button class="ghost removeMeal">Remove</button>
+    </li>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

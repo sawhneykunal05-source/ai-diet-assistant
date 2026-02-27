@@ -1,0 +1,10 @@
+﻿{
+  "name": "ai-diet-assistant-pro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Premium AI diet assistant with auth, profile sync, Groq coach, USDA nutrition search, and barcode flow.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
